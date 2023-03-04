@@ -1,0 +1,105 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl368\partightenfactor0
+
+\f0\fs26\fsmilli13333 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 #include <kipr/wombat.h>
+\f1\fs24 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl368\partightenfactor0
+
+\f0\fs26\fsmilli13333 \cf2 int main()
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \{
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0enable_servos();
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0set_servo_position(3, 500);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(200);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0, -1200);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(1200);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(6270);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0set_servo_position(3, 6);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0set_servo_position(3, 600);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0,300);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3,-400);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(7000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0,-1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3,-1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(17000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(0, 1000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0mav(3,-100);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0msleep(2000);
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0disable_servos();
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \'a0\'a0\'a0\'a0return 0;
+\f1\fs24 \
+
+\f0\fs26\fsmilli13333 \}\'a0
+\f1\fs24 \
+}
