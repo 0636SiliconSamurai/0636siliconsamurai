@@ -1,0 +1,119 @@
+#include <kipr/wombat.h>
+#include <stdlib.h>
+
+int LEFT_WHEEL_PORT = 0;
+int RIGHT_WHEEL_PORT = 3;
+// right wire red (top), left wire black (top)
+
+ 
+
+// distance in ticks, never use speed more than 1300
+// speed -1300 to 1300, negative is backwards
+void drive(int distance, int speed) {    
+    cmpc(LEFT_WHEEL_PORT);
+
+    while (abs(gmpc(LEFT_WHEEL_PORT)) < distance) {
+        mav(LEFT_WHEEL_PORT, speed);
+        mav(RIGHT_WHEEL_PORT, speed);
+    }
+    // full stop
+    mav(LEFT_WHEEL_PORT, 0);
+    mav(RIGHT_WHEEL_PORT, 0);
+    msleep(20);
+}
+
+void turn_right(int distance, int speed) {
+    cmpc(LEFT_WHEEL_PORT); // clear motor postion counter, left wheel move forward in right turn
+    while (gmpc(LEFT_WHEEL_PORT) < distance) {
+        mav(LEFT_WHEEL_PORT, speed);
+        mav(RIGHT_WHEEL_PORT, -speed);
+    }
+    // full stop
+    mav(LEFT_WHEEL_PORT, 0);
+    mav(RIGHT_WHEEL_PORT, 0);
+    msleep(20);
+}
+
+void turn_left(int distance, int speed) {
+    cmpc(RIGHT_WHEEL_PORT); // clear motor postion counter, right wheel move forward in left turn
+    while (gmpc(RIGHT_WHEEL_PORT) < distance) {
+        mav(LEFT_WHEEL_PORT, -speed);
+        mav(RIGHT_WHEEL_PORT, speed);
+    }
+    // full stop
+    mav(LEFT_WHEEL_PORT, 0);
+    mav(RIGHT_WHEEL_PORT, 0);
+    msleep(20);
+}
+
+void wall_follow(int distance, int speed) {    
+    cmpc(LEFT_WHEEL_PORT);
+
+    while (abs(gmpc(LEFT_WHEEL_PORT)) < distance) {
+        mav(LEFT_WHEEL_PORT, speed);
+        mav(RIGHT_WHEEL_PORT, speed - 30);
+    }
+    // full stop
+    mav(LEFT_WHEEL_PORT, 0);
+    mav(RIGHT_WHEEL_PORT, 0);
+    msleep(20);
+}
+
+// 1700 is the average between completely black and completely white
+int middle_of_black_white = 17000;
+void simple_line_follow(int distance, int speed, int light_sensor_port) {
+    cmpc(LEFT_WHEEL_PORT);
+    while (abs(gmpc(LEFT_WHEEL_PORT)) < distance) {
+        if (analog(light_sensor_port) < middle_of_black_white) { // white, turn left
+            mav(RIGHT_WHEEL_PORT, speed + 25);
+            mav(LEFT_WHEEL_PORT, speed - 25);
+        }
+        if (analog(light_sensor_port) > middle_of_black_white) { // black, turn right
+            mav(RIGHT_WHEEL_PORT, speed - 25);
+            mav(LEFT_WHEEL_PORT, speed + 25);
+        }
+    }
+    // full stop
+    mav(LEFT_WHEEL_PORT, 0);
+    mav(RIGHT_WHEEL_PORT, 0);
+    msleep(20);    
+}
+
+
+int main() {
+
+ enable_servos();
+    set_servo_position(3,595);
+    msleep(1000);
+    turn_right(1200, 800);
+    wall_follow(5800,1000); 
+    turn_left(240,100);
+    drive(950,500);
+    turn_right(150,100);
+    set_servo_position(3,1);
+    msleep(1000);
+    drive(650,700);
+    set_servo_position(3,655);
+    turn_left(2600,1000);
+    drive(300,-300);
+    turn_left(470,100);
+    drive(9000,-900);
+    turn_left(460,100);
+    drive(9000,-900);
+    drive(900,600);
+    turn_left(2500,600);
+    // turn left to reach ping pong balls.
+    drive(1000,-600);
+    turn_left(480,400);
+    drive(2400,700);
+	set_servo_position(3,1);
+    msleep(1000);
+    // ping pong balls drop. (after 1 min)
+    drive(2300,-600);
+    turn_right(2000,600);
+    drive(1000,-600);
+    disable_servos();
+    
+    return 0;
+
+}
